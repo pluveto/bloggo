@@ -25,9 +25,10 @@ func (api *API) GetPing(c *gin.Context) {
 }
 
 func (api *API) GetHomeView(c *gin.Context) {
-	var siteName = api.service.GetSetting("siteName")
+	var siteName, _ = api.service.GetOrDefault("siteName", "未命名博客")
+	var siteDescription, _ = api.service.GetOrDefault("siteDescription", "")
 	c.HTML(http.StatusOK, "home.html", gin.H{
 		"siteName":        siteName,
-		"siteDescription": "Written in Golang",
+		"siteDescription": siteDescription,
 	})
 }

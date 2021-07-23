@@ -1,17 +1,19 @@
 package repository
 
 import (
-	"database/sql"
 	"fmt"
 	"os"
 
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/pluveto/bloggo/pkg/bloggo"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
 
 type Repository struct {
-	dbConn *sql.DB
+	db *gorm.DB
 }
+
+
 
 func New(c *bloggo.Config) *Repository {
 	var err error
@@ -19,7 +21,8 @@ func New(c *bloggo.Config) *Repository {
 	var repo = &Repository{}
 
 	var wd, _ = os.Getwd()
-	repo.dbConn, err = sql.Open("sqlite3", wd+"/tmp.db")
+	repo.db, err = gorm.Open(sqlite.Open(wd+"/tmp.db"), &gorm.Config{})
+
 	checkErr(err)
 	fmt.Println("Repo is ready.")
 	return repo

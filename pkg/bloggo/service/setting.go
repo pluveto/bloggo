@@ -1,15 +1,19 @@
 package service
 
-func (s *Service) GetSetting(key string) interface{} {
+func (s *Service) GetSetting(key string) (value string, err error) {
 	return s.repo.GetSetting(key)
 }
 
-// TODO
-func (s *Service) GetOrDefault(key string, defaultValue interface{}) interface{} {
-	return nil
+func (s *Service) GetOrDefault(key string, defaultValue string) (value string, err error) {
+	value, err = s.repo.GetSetting(key)
+	if err != nil {
+		value = defaultValue
+		err = nil
+	}
+	return
 }
 
 // TODO
-func (s *Service) Set(key string, value interface{}) {
+func (s *Service) Set(key string, value string) {
 
 }
