@@ -3,3 +3,5 @@
 /tmp
 /logs
 go.sum
+*.db
+*config.json
