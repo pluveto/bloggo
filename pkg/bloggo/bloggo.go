@@ -1,5 +1,10 @@
 package bloggo
 
+// == config ==
+
+type Config struct {
+}
+
 // == Blog ==
 
 type SiteSetting map[string]interface {
