@@ -7,15 +7,17 @@ type Setting struct {
 }
 
 // == USER ==
-
+/*
 type User struct {
 	ID          uint64
 	Username    string
 	Password    string
+	Salt        string
 	Email       string
 	Description string
 	AvatarUrl   string
 }
+*/
 
 type Token struct {
 	UserID     uint64
@@ -23,11 +25,14 @@ type Token struct {
 	ExpiredAt  int64
 }
 
+/*
 type UserServicer interface {
 	Login(username string, password string) *Token
 	Logout(tokenValue string)
 	Create(user *User)
 }
+
+*/
 
 // == POST ==
 
