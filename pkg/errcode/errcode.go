@@ -3,8 +3,6 @@ package errcode
 import (
 	"fmt"
 	"strconv"
-
-	"github.com/pkg/errors"
 )
 
 var (
@@ -19,12 +17,23 @@ var (
 
 var (
 	// [000000, 600000) 为公共错误码
-	OK             = New(200000, "")
-	NoSuchResource = New(404000, "No such resource")
-	BadRequest     = New(400000, "Bad Request")
-	ServerErr      = New(500000, "Server internal error")
+	OK                  = New(200000, "")
+	ErrBadRequest       = New(400000, "Bad request")
+	ErrBadParam         = New(400001, "Bad request: invalid request param, fail to pass validation")
+	ErrTokenExpired     = New(400002, "Token has been expired.")
+	ErrTokenNotValidYet = New(400003, "Token has been destroyed.")
+	ErrTokenMalformed   = New(400004, "Failed to parse token.")
+	ErrTokenInvalid     = New(400005, "Token has been expired.")
+	ErrWrongPassword    = New(400006, "Incorrect subject or password.")
+	ErrTokenMissing     = New(401001, "Missing token.")
+	ErrNoSuchResource   = New(404000, "No such resource")	
+	ErrServerInternal   = New(500000, "Server internal error")
 	// [600000, ......]
-	// 为业务错误码，自行注册，其中前两位为业务编号，后四位为业务错误编号
+	// 为业务错误码，自行注册，其中前两位为业务编号，第三位为 HTTP 错误码，后三位为业务错误编号
+	//  61  4 0 0 0
+	//  ^^  ^
+	//  |  客户端错误
+	// 业务号 01
 )
 
 type ApiError int
@@ -38,7 +47,7 @@ func New(code int, message string) int {
 		panic("`messages` map is not initialized!")
 	}
 	if _, ok := messages[code]; ok {
-		panic(fmt.Sprintf("errcode: %d already exist", code))
+		panic(fmt.Sprintf("You are registering a duplicated errcode (value is %d), check your code!", code))
 	}
 	messages[code] = message
 	return (code)
@@ -62,9 +71,11 @@ func (e ApiError) Code() int { return int(e) }
 
 // 获取错误消息
 func (e ApiError) Message() string {
-	if msg, ok := messages[int(e)]; ok {
+	msg, ok := messages[int(e)]
+	if ok {
 		return msg
 	}
+	fmt.Printf("Unregistered errcode: %v", int(e))
 	return e.Error()
 }
 
@@ -76,23 +87,31 @@ func String(e string) ApiError {
 	// try error string
 	i, err := strconv.Atoi(e)
 	if err != nil {
-		return ApiError(ServerErr)
+		fmt.Printf("unknown error code. err: %v", err.Error())
+		return ApiError(ErrServerInternal)
 	}
 	return ApiError(i)
 }
 
 // 将其它错误转换为 IApiError（必须是通过 errcode.XXX 引用得到的错误才能被转换）
-func Cause(e error) IApiError {
+func Cause(e error) ApiError {
 	if e == nil {
 		return ApiError(OK)
-	}
-	ec, ok := errors.Cause(e).(IApiError)
-	if ok {
-		return ec
 	}
 	return String(e.Error())
 }
 
 func (e ApiError) ToHttpStatusCode() int {
-	return e.Code() / 1000
+	// 处理公共错误码
+	var c = e.Code() / 1000
+	if c < 600 {
+		return c
+	}
+	// 获取业务错误码的状态码
+	c = ((c % 10) * 100)
+	if c < 600 {
+		return c
+	}
+	// 如果业务错误码的状态码位填写异常，则返回 418
+	return 418
 }
