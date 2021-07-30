@@ -5,3 +5,4 @@
 go.sum
 *.db
 *config.json
+*.pyc
