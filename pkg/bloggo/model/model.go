@@ -19,12 +19,6 @@ type User struct {
 }
 */
 
-type Token struct {
-	UserID     uint64
-	TokenValue string
-	ExpiredAt  int64
-}
-
 /*
 type UserServicer interface {
 	Login(username string, password string) *Token
