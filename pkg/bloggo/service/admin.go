@@ -41,6 +41,11 @@ func (s *Service) AdminCreateByEmail(email string, password string) (ret *model.
 	return
 }
 
+func (s *Service) AdminGet(id int64) (ret *model.Admin, err error) {
+	ret, err = s.repo.AdminGet(id)
+	return
+}
+
 func (s *Service) AdminGetByEmail(email string) (ret *model.Admin, err error) {
 	ret, err = s.repo.AdminGetByEmail(email)
 	return
@@ -61,5 +66,17 @@ func (s *Service) AdminAuthByEmail(email string, password string) (ret *model.Ad
 		ret = nil
 		return
 	}
+	return
+}
+
+func (s *Service) AdminUpdate(model *model.Admin) (err error) {
+	var salt = util.RandString(8)
+	hashedPassword, err := HashPassword(model.Password, salt)
+	if err != nil {
+		return
+	}
+	model.Password = hashedPassword
+	model.Salt = salt
+	err = s.repo.AdminUpdate(model)
 	return
 }
