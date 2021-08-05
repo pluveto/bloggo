@@ -15,7 +15,7 @@ func (repo *Repository) AdminCreate(admin *model.Admin) (err error) {
 	return
 }
 
-func (repo *Repository) AdminGet(id uint64) (model *model.Admin, err error) {
+func (repo *Repository) AdminGet(id int64) (model *model.Admin, err error) {
 	return repo.adminGetByUniqueKeyValue("id", id)
 }
 
@@ -35,4 +35,10 @@ func (repo *Repository) adminGetByUniqueKeyValue(key string, value interface{}) 
 		return nil, err
 	}
 	return &m, err
+}
+
+// AdminUpdate
+// ! id is required
+func (repo *Repository) AdminUpdate(model *model.Admin) (err error) {
+	return repo.db.Save(model).Error
 }
