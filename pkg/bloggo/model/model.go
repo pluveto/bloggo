@@ -9,7 +9,7 @@ type Setting struct {
 // == USER ==
 /*
 type User struct {
-	ID          uint64
+	ID          int64
 	Username    string
 	Password    string
 	Salt        string
@@ -29,21 +29,9 @@ type UserServicer interface {
 */
 
 // == POST ==
-
-type Post struct {
-	ID          uint64
-	AuthorID    uint64
-	Path        string
-	Slug        string
-	Title       string
-	Content     string
-	PublishedAt int64
-	ModifiedAt  int64
-}
-
 type Comment struct {
-	ID          uint64
-	PostID      uint64
+	ID          int64
+	PostID      int64
 	Content     string
 	AuthorName  string
 	AuthorEmail string
