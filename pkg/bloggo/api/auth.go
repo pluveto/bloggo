@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"github.com/pluveto/bloggo/pkg/bloggo/model"
 	"github.com/pluveto/bloggo/pkg/errcode"
 )
 
@@ -43,10 +44,73 @@ func (api *API) AuthLogin(c *gin.Context) {
 	api.RetJSON(c, tokenStr, err)
 }
 
+type AuthGetUserInfoRet struct {
+	Username    string `json:"username"`
+	ScreenName  string `json:"screenName"`
+	ID          int64  `json:"id"`
+	Email       string `json:"email"`
+	Description string `json:"description"`
+	AvatarUrl   string `json:"avatarUrl"`
+}
+
+func (api *API) AuthGetUserInfo(c *gin.Context) {
+	tmpid, _ := c.Get("uid")
+	var uid = tmpid.(int64)
+	admin, _ := api.Service.AdminGet(uid)
+	api.RetJSON(c, &AuthGetUserInfoRet{
+		Username:    admin.Username,
+		ID:          admin.ID,
+		ScreenName:  admin.ScreenName,
+		Email:       admin.Email,
+		Description: admin.Description,
+		AvatarUrl:   admin.AvatarUrl,
+	}, nil)
+}
+
+// todo: 参数校验
+type AuthUpdateUserInfoReq struct {
+	Username    string `json:"username"`
+	ScreenName  string `json:"screenName"`
+	Password    string `json:"password"`
+	Email       string `json:"email"`
+	Description string `json:"description"`
+	AvatarUrl   string `json:"avatarUrl"`
+}
+
+func (api *API) AuthUpdateUserInfo(c *gin.Context) {
+	var (
+		req AuthUpdateUserInfoReq
+		err error = c.ShouldBindJSON(&req)
+	)
+
+	if err != nil {
+		api.retBadParam(c, err)
+		return
+	}
+	tmpid, _ := c.Get("uid")
+	var uid = tmpid.(int64)
+	// todo: 冲突检查
+	var m = &model.Admin{
+		ID: uid,
+		Username:    req.Username,
+		ScreenName:  req.ScreenName,
+		Password:    req.Password,
+		Email:       req.Email,
+		Description: req.Description,
+		AvatarUrl:   req.AvatarUrl,
+	}
+	err = api.Service.AdminUpdate(m)
+	api.RetJSON(c, nil, err)
+}
+
 func (api *API) retBadParam(c *gin.Context, err error) {
-	api.RetJSON(c, nil, errcode.ApiError(errcode.ErrBadParam))
 	var errs, ok = err.(validator.ValidationErrors)
 	if ok {
 		fmt.Printf("first param err: %v\n", errs[0])
+	} else {
+		// ! 可能是 JSON 无效引起的
+		fmt.Printf("first param err 2: %v\n", errs.Error())
 	}
+	api.RetJSON(c, nil, errcode.ApiError(errcode.ErrBadParam))
+
 }
