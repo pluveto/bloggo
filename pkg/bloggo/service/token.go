@@ -15,10 +15,10 @@ func (s *Service) TokenIsDestroyed(token string) (destroyed bool) {
 // 创建一个token
 func (s *Service) TokenCreate(claims jwt.StandardClaims) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString([]byte("some key here"))
+	return token.SignedString([]byte("65JymYzDDqqLW8Eg"))
 }
 
-func (s *Service) TokenCreateClaims(adminId uint64) *jwt.StandardClaims {
+func (s *Service) TokenCreateClaims(adminId int64) *jwt.StandardClaims {
 	var times time.Time = time.Now()
 
 	return &jwt.StandardClaims{
@@ -28,13 +28,14 @@ func (s *Service) TokenCreateClaims(adminId uint64) *jwt.StandardClaims {
 		IssuedAt:  times.Unix(),
 		Issuer:    "bloggo_server",
 		NotBefore: times.Unix(),
-		Subject:   strconv.FormatUint(adminId, 10),
+		Subject:   strconv.FormatInt(adminId, 10),
 	}
 }
 
 func (s *Service) TokenParse(tokenString string) (*jwt.StandardClaims, error) {
+	// fmt.Printf("Parse %v\n", tokenString)
 	token, err := jwt.ParseWithClaims(tokenString, &jwt.StandardClaims{}, func(token *jwt.Token) (i interface{}, e error) {
-		return []byte("some key here"), nil
+		return []byte("65JymYzDDqqLW8Eg"), nil
 	})
 	if err != nil {
 		if ve, ok := err.(*jwt.ValidationError); ok {
