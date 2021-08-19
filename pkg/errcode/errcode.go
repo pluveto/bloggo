@@ -26,7 +26,7 @@ var (
 	ErrTokenInvalid     = New(400005, "Token has been expired.")
 	ErrWrongPassword    = New(400006, "Incorrect subject or password.")
 	ErrTokenMissing     = New(401001, "Missing token.")
-	ErrNoSuchResource   = New(404000, "No such resource")	
+	ErrNoSuchResource   = New(404000, "No such resource")
 	ErrServerInternal   = New(500000, "Server internal error")
 	// [600000, ......]
 	// 为业务错误码，自行注册，其中前两位为业务编号，第三位为 HTTP 错误码，后三位为业务错误编号
@@ -75,7 +75,7 @@ func (e ApiError) Message() string {
 	if ok {
 		return msg
 	}
-	fmt.Printf("Unregistered errcode: %v", int(e))
+	fmt.Printf("Unregistered errcode: %v\n", int(e))
 	return e.Error()
 }
 
@@ -87,7 +87,7 @@ func String(e string) ApiError {
 	// try error string
 	i, err := strconv.Atoi(e)
 	if err != nil {
-		fmt.Printf("unknown error code. err: %v", err.Error())
+		fmt.Printf("unknown error code. err: %v\n", err.Error())
 		return ApiError(ErrServerInternal)
 	}
 	return ApiError(i)
