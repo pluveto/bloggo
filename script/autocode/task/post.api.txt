@@ -1,0 +1,241 @@
+
+
+	
+
+	
+	type PostCreateReq struct {
+		Path    string `form:"path" json:"path" binding:"required"`
+		Slug    string `form:"slug" json:"slug" binding:"required"`
+		Title    string `form:"title" json:"title" binding:"required"`
+		Content    string `form:"content" json:"content" binding:"required"`
+	}
+	
+
+	
+
+	
+	type PostCreateRet struct {
+		ID    int64 
+		Slug    string 
+	}
+	
+
+	
+
+	
+	
+	func (api *API) PostCreate(c *gin.Context) {
+		var (
+			req PostCreateReq
+			err error = c.ShouldBindJSON(&req)
+		)
+
+		if err != nil {
+			api.retBadParam(c, err)
+			return
+		}
+		
+		
+		var existingPost *model.Post		
+		
+		existingPost, _ := api.Service.PostGetBySlug(req.Slug)
+		if existingPost != nil {
+			api.RetJSON(c, nil, errcode.ApiError(bloggo.ErrConflictPost))
+			return
+		}		
+		newPost, err := api.Service.PostCreate(
+				req.Path,
+				req.Slug,
+				req.Title,
+				req.Content,
+		)
+		if err != nil {
+			api.RetJSON(c, nil, err)
+			return
+		}
+		var retModel = PostCreateRet{ID: newPost.ID}	
+		api.RetJSON(c, retModel, err)
+	}
+	
+	
+
+	
+
+	
+	type PostGetReq struct {
+		ID    int64 `form:"id" json:"id" binding:"required"`
+		Slug    string `form:"slug" json:"slug" binding:"required"`
+	}
+	
+
+	
+
+	
+	type PostGetRet struct {
+		ID    int64 
+		Path    string 
+		Slug    string 
+		Title    string 
+		Content    string 
+		PublishedAt    int64 
+		ModifiedAt    int64 
+	}
+	
+
+	
+
+	
+
+	
+
+	
+	type PostGetRecentReq struct {
+		ID    int64 `form:"id" json:"id" binding:"required"`
+		Slug    string `form:"slug" json:"slug" binding:"required"`
+	}
+	
+
+	
+
+	
+	type PostGetRecentRet struct {
+		ID    int64 
+		Path    string 
+		Slug    string 
+		Title    string 
+		Content    string 
+		PublishedAt    int64 
+		ModifiedAt    int64 
+	}
+	
+
+	
+
+	
+
+	
+
+	
+	type PostListReq struct {
+	}
+	
+
+	
+
+	
+	type PostListRet struct {
+		ID    int64 
+		Path    string 
+		Slug    string 
+		Title    string 
+		Content    string 
+		PublishedAt    int64 
+		ModifiedAt    int64 
+	}
+	
+
+	
+
+	
+
+	
+
+	
+	type PostUpdateReq struct {
+		ID    int64 `form:"id" json:"id" binding:"required"`
+		Path    string `form:"path" json:"path" binding:"required"`
+		Slug    string `form:"slug" json:"slug" binding:"required"`
+		Title    string `form:"title" json:"title" binding:"required"`
+		Content    string `form:"content" json:"content" binding:"required"`
+	}
+	
+
+	
+
+	
+	type PostUpdateRet struct {
+	}
+	
+
+	
+
+	
+
+	
+
+	
+	type PostSearchReq struct {
+	}
+	
+
+	
+
+	
+	type PostSearchRet struct {
+		ID    int64 
+		Path    string 
+		Slug    string 
+		Title    string 
+		Content    string 
+		PublishedAt    int64 
+		ModifiedAt    int64 
+	}
+	
+
+	
+
+	
+
+	
+
+	
+	type PostEnableReq struct {
+		ID    int64 `form:"id" json:"id" binding:"required"`
+		Slug    string `form:"slug" json:"slug" binding:"required"`
+	}
+	
+
+	
+
+	
+	type PostEnableRet struct {
+		ID    int64 
+		Path    string 
+		Slug    string 
+		Title    string 
+		Content    string 
+		PublishedAt    int64 
+		ModifiedAt    int64 
+	}
+	
+
+	
+
+	
+
+	
+
+	
+	type PostDisableReq struct {
+		ID    int64 `form:"id" json:"id" binding:"required"`
+		Slug    string `form:"slug" json:"slug" binding:"required"`
+	}
+	
+
+	
+
+	
+	type PostDisableRet struct {
+		ID    int64 
+		Path    string 
+		Slug    string 
+		Title    string 
+		Content    string 
+		PublishedAt    int64 
+		ModifiedAt    int64 
+	}
+	
+
+	
+
+	

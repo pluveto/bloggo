@@ -1,0 +1,1513 @@
+{
+  "name": "Post",
+  "route": "/post",
+  "meta": {
+    "json": "post",
+    "label": "帖子"
+  },
+  "apis": [
+    {
+      "form": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "reqFields": [
+        {
+          "name": "Path",
+          "json": "path",
+          "column": "path",
+          "column_meta": {
+            "column": "path",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 2,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "路径",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "primary_key": null,
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "网址别名",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Title",
+          "json": "title",
+          "column": "title",
+          "column_meta": {
+            "column": "title",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 4,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "标题",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Content",
+          "json": "content",
+          "column": "content",
+          "column_meta": {
+            "column": "content",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 5,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "内容",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        }
+      ],
+      "retFields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primary_key": true,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 0,
+          "mode": [
+            {}
+          ],
+          "label": "ID",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "primary_key": null,
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "网址别名",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        }
+      ],
+      "paging": false,
+      "method": "POST",
+      "route": "/create",
+      "action": "Create",
+      "actionOn": "",
+      "baseModel": "Post",
+      "permissions": [
+        "Post.Create"
+      ],
+      "autoAssign": {
+        "PublishedAt": "${created_at}",
+        "ModifiedAt": "${updated_at}"
+      },
+      "order": 0
+    },
+    {
+      "form": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "slug": {
+            "type": "string"
+          }
+        }
+      },
+      "reqFields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primary_key": true,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 0,
+          "mode": [
+            {}
+          ],
+          "label": "ID",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "primary_key": null,
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "网址别名",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        }
+      ],
+      "retFields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primary_key": true,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 0,
+          "mode": [
+            {}
+          ],
+          "label": "ID",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Path",
+          "json": "path",
+          "column": "path",
+          "column_meta": {
+            "column": "path",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 2,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "路径",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "primary_key": null,
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "网址别名",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Title",
+          "json": "title",
+          "column": "title",
+          "column_meta": {
+            "column": "title",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 4,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "标题",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Content",
+          "json": "content",
+          "column": "content",
+          "column_meta": {
+            "column": "content",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 5,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "内容",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "PublishedAt",
+          "json": "publishedAt",
+          "column": "published_at",
+          "column_meta": {
+            "column": "published_at",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 6,
+          "mode": [
+            {}
+          ],
+          "label": "发布于",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "ModifiedAt",
+          "json": "modifiedAt",
+          "column": "modified_at",
+          "column_meta": {
+            "column": "modified_at",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 7,
+          "mode": [
+            {}
+          ],
+          "label": "编辑于",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        }
+      ],
+      "paging": false,
+      "method": "GET",
+      "route": "/get",
+      "action": "Get",
+      "actionOn": "",
+      "baseModel": "Post",
+      "permissions": [
+        "Post.Get"
+      ],
+      "autoAssign": {
+        "PublishedAt": "${created_at}",
+        "ModifiedAt": "${updated_at}"
+      },
+      "order": 0
+    },
+    {
+      "form": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "slug": {
+            "type": "string"
+          }
+        }
+      },
+      "reqFields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primary_key": true,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 0,
+          "mode": [
+            {}
+          ],
+          "label": "ID",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "primary_key": null,
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "网址别名",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        }
+      ],
+      "retFields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primary_key": true,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 0,
+          "mode": [
+            {}
+          ],
+          "label": "ID",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Path",
+          "json": "path",
+          "column": "path",
+          "column_meta": {
+            "column": "path",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 2,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "路径",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "primary_key": null,
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "网址别名",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Title",
+          "json": "title",
+          "column": "title",
+          "column_meta": {
+            "column": "title",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 4,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "标题",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Content",
+          "json": "content",
+          "column": "content",
+          "column_meta": {
+            "column": "content",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 5,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "内容",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "PublishedAt",
+          "json": "publishedAt",
+          "column": "published_at",
+          "column_meta": {
+            "column": "published_at",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 6,
+          "mode": [
+            {}
+          ],
+          "label": "发布于",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "ModifiedAt",
+          "json": "modifiedAt",
+          "column": "modified_at",
+          "column_meta": {
+            "column": "modified_at",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 7,
+          "mode": [
+            {}
+          ],
+          "label": "编辑于",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        }
+      ],
+      "paging": true,
+      "method": "GET",
+      "route": "/get_recent",
+      "action": "Get",
+      "actionOn": "Recent",
+      "baseModel": "Post",
+      "permissions": [
+        "Post.Get"
+      ],
+      "autoAssign": {
+        "PublishedAt": "${created_at}",
+        "ModifiedAt": "${updated_at}"
+      },
+      "order": "PublishedAt desc"
+    },
+    {
+      "form": {
+        "type": "object",
+        "properties": {}
+      },
+      "reqFields": [],
+      "retFields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primary_key": true,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 0,
+          "mode": [
+            {}
+          ],
+          "label": "ID",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Path",
+          "json": "path",
+          "column": "path",
+          "column_meta": {
+            "column": "path",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 2,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "路径",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "primary_key": null,
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "网址别名",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Title",
+          "json": "title",
+          "column": "title",
+          "column_meta": {
+            "column": "title",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 4,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "标题",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Content",
+          "json": "content",
+          "column": "content",
+          "column_meta": {
+            "column": "content",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 5,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "内容",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "PublishedAt",
+          "json": "publishedAt",
+          "column": "published_at",
+          "column_meta": {
+            "column": "published_at",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 6,
+          "mode": [
+            {}
+          ],
+          "label": "发布于",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "ModifiedAt",
+          "json": "modifiedAt",
+          "column": "modified_at",
+          "column_meta": {
+            "column": "modified_at",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 7,
+          "mode": [
+            {}
+          ],
+          "label": "编辑于",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        }
+      ],
+      "paging": true,
+      "method": "POST",
+      "route": "/list",
+      "action": "List",
+      "actionOn": "",
+      "baseModel": "Post",
+      "permissions": [
+        "Post.List"
+      ],
+      "autoAssign": {
+        "PublishedAt": "${created_at}",
+        "ModifiedAt": "${updated_at}"
+      },
+      "order": 0
+    },
+    {
+      "form": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "path": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "reqFields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primary_key": true,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 0,
+          "mode": [
+            {}
+          ],
+          "label": "ID",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Path",
+          "json": "path",
+          "column": "path",
+          "column_meta": {
+            "column": "path",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 2,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "路径",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "primary_key": null,
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "网址别名",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Title",
+          "json": "title",
+          "column": "title",
+          "column_meta": {
+            "column": "title",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 4,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "标题",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Content",
+          "json": "content",
+          "column": "content",
+          "column_meta": {
+            "column": "content",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 5,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "内容",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        }
+      ],
+      "retFields": [],
+      "paging": false,
+      "method": "POST",
+      "route": "/update",
+      "action": "Update",
+      "actionOn": "",
+      "baseModel": "Post",
+      "permissions": [
+        "Post.Update"
+      ],
+      "autoAssign": {
+        "PublishedAt": "${created_at}",
+        "ModifiedAt": "${updated_at}"
+      },
+      "order": 0
+    },
+    {
+      "form": {
+        "type": "object",
+        "properties": {}
+      },
+      "reqFields": [],
+      "retFields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primary_key": true,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 0,
+          "mode": [
+            {}
+          ],
+          "label": "ID",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Path",
+          "json": "path",
+          "column": "path",
+          "column_meta": {
+            "column": "path",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 2,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "路径",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "primary_key": null,
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "网址别名",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Title",
+          "json": "title",
+          "column": "title",
+          "column_meta": {
+            "column": "title",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 4,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "标题",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Content",
+          "json": "content",
+          "column": "content",
+          "column_meta": {
+            "column": "content",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 5,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "内容",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "PublishedAt",
+          "json": "publishedAt",
+          "column": "published_at",
+          "column_meta": {
+            "column": "published_at",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 6,
+          "mode": [
+            {}
+          ],
+          "label": "发布于",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "ModifiedAt",
+          "json": "modifiedAt",
+          "column": "modified_at",
+          "column_meta": {
+            "column": "modified_at",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 7,
+          "mode": [
+            {}
+          ],
+          "label": "编辑于",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        }
+      ],
+      "paging": true,
+      "method": "POST",
+      "route": "/search",
+      "action": "Search",
+      "actionOn": "",
+      "baseModel": "Post",
+      "permissions": [
+        "Post.Search"
+      ],
+      "autoAssign": {
+        "PublishedAt": "${created_at}",
+        "ModifiedAt": "${updated_at}"
+      },
+      "order": 0
+    },
+    {
+      "form": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "slug": {
+            "type": "string"
+          }
+        }
+      },
+      "reqFields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primary_key": true,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 0,
+          "mode": [
+            {}
+          ],
+          "label": "ID",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "primary_key": null,
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "网址别名",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        }
+      ],
+      "retFields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primary_key": true,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 0,
+          "mode": [
+            {}
+          ],
+          "label": "ID",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Path",
+          "json": "path",
+          "column": "path",
+          "column_meta": {
+            "column": "path",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 2,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "路径",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "primary_key": null,
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "网址别名",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Title",
+          "json": "title",
+          "column": "title",
+          "column_meta": {
+            "column": "title",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 4,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "标题",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Content",
+          "json": "content",
+          "column": "content",
+          "column_meta": {
+            "column": "content",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 5,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "内容",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "PublishedAt",
+          "json": "publishedAt",
+          "column": "published_at",
+          "column_meta": {
+            "column": "published_at",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 6,
+          "mode": [
+            {}
+          ],
+          "label": "发布于",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "ModifiedAt",
+          "json": "modifiedAt",
+          "column": "modified_at",
+          "column_meta": {
+            "column": "modified_at",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 7,
+          "mode": [
+            {}
+          ],
+          "label": "编辑于",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        }
+      ],
+      "paging": false,
+      "method": "POST",
+      "route": "/enable",
+      "action": "Enable",
+      "actionOn": "",
+      "baseModel": "Post",
+      "permissions": [
+        "Post.Enable"
+      ],
+      "autoAssign": {
+        "PublishedAt": "${created_at}",
+        "ModifiedAt": "${updated_at}"
+      },
+      "order": 0
+    },
+    {
+      "form": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "slug": {
+            "type": "string"
+          }
+        }
+      },
+      "reqFields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primary_key": true,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 0,
+          "mode": [
+            {}
+          ],
+          "label": "ID",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "primary_key": null,
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "网址别名",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        }
+      ],
+      "retFields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primary_key": true,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 0,
+          "mode": [
+            {}
+          ],
+          "label": "ID",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Path",
+          "json": "path",
+          "column": "path",
+          "column_meta": {
+            "column": "path",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 2,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "路径",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "primary_key": null,
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "网址别名",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Title",
+          "json": "title",
+          "column": "title",
+          "column_meta": {
+            "column": "title",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 4,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "标题",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "Content",
+          "json": "content",
+          "column": "content",
+          "column_meta": {
+            "column": "content",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "string",
+          "weight": 5,
+          "mode": [
+            {},
+            {}
+          ],
+          "label": "内容",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "PublishedAt",
+          "json": "publishedAt",
+          "column": "published_at",
+          "column_meta": {
+            "column": "published_at",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 6,
+          "mode": [
+            {}
+          ],
+          "label": "发布于",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        },
+        {
+          "name": "ModifiedAt",
+          "json": "modifiedAt",
+          "column": "modified_at",
+          "column_meta": {
+            "column": "modified_at",
+            "primary_key": null,
+            "unique": null
+          },
+          "kind": "int64",
+          "weight": 7,
+          "mode": [
+            {}
+          ],
+          "label": "编辑于",
+          "type": "text",
+          "searchable": false,
+          "sortable": false,
+          "required": true
+        }
+      ],
+      "paging": false,
+      "method": "POST",
+      "route": "/disable",
+      "action": "Disable",
+      "actionOn": "",
+      "baseModel": "Post",
+      "permissions": [
+        "Post.Disable"
+      ],
+      "autoAssign": {
+        "PublishedAt": "${created_at}",
+        "ModifiedAt": "${updated_at}"
+      },
+      "order": 0
+    }
+  ]
+}

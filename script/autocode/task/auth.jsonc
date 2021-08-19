@@ -1,0 +1,15 @@
+// Auth group api
+{
+    "name": "Auth",
+    "meta": {
+        "url": ".",
+        "json": "."
+    },
+    "api": [
+        {
+            "method": "GET",
+            "action": "Get",
+            "action_on": "CurrentUserInfo"
+        }
+    ]
+}

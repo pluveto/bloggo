@@ -1,0 +1,307 @@
+{
+  "models": [
+    {
+      "name": "Admin",
+      "meta": {
+        "table": "admins",
+        "json": "admin"
+      },
+      "fields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primaryKey": true
+          },
+          "kind": "int64",
+          "weight": 0,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "r"
+          ],
+          "label": null,
+          "type": null
+        },
+        {
+          "name": "Username",
+          "json": "username",
+          "column": "username",
+          "column_meta": {
+            "column": "username"
+          },
+          "kind": "string",
+          "weight": 0,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "r",
+            "w"
+          ],
+          "label": "用户名",
+          "type": "text"
+        },
+        {
+          "name": "ScreenName",
+          "json": "screenName",
+          "column": "screen_name",
+          "column_meta": {
+            "column": "screen_name"
+          },
+          "kind": "string",
+          "weight": 1,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "r",
+            "w"
+          ],
+          "label": "昵称",
+          "type": "text"
+        },
+        {
+          "name": "Password",
+          "json": "password",
+          "column": "password",
+          "column_meta": {
+            "column": "password"
+          },
+          "kind": "string",
+          "weight": 4,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "w"
+          ],
+          "label": "密码",
+          "type": "password"
+        },
+        {
+          "name": "Salt",
+          "json": "salt",
+          "column": "salt",
+          "column_meta": {
+            "column": "salt"
+          },
+          "kind": "string",
+          "weight": 0,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "i"
+          ],
+          "label": null,
+          "type": null
+        },
+        {
+          "name": "Email",
+          "json": "email",
+          "column": "email",
+          "column_meta": {
+            "column": "email",
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "r",
+            "w"
+          ],
+          "label": "邮箱",
+          "type": "email"
+        },
+        {
+          "name": "Description",
+          "json": "description",
+          "column": "description",
+          "column_meta": {
+            "column": "description"
+          },
+          "kind": "string",
+          "weight": 9,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "r",
+            "w"
+          ],
+          "label": "个人介绍",
+          "type": "textarea"
+        },
+        {
+          "name": "AvatarUrl",
+          "json": "avatarUrl",
+          "column": "avatar_url",
+          "column_meta": {
+            "column": "avatar_url"
+          },
+          "kind": "string",
+          "weight": 2,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "r",
+            "w"
+          ],
+          "label": "头像链接",
+          "type": "url"
+        }
+      ]
+    },
+    {
+      "name": "Post",
+      "meta": {
+        "table": "admins",
+        "json": "admin"
+      },
+      "fields": [
+        {
+          "name": "ID",
+          "json": "id",
+          "column": "id",
+          "column_meta": {
+            "column": "id",
+            "primaryKey": true
+          },
+          "kind": "int64",
+          "weight": 0,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "r"
+          ],
+          "label": "ID",
+          "type": "text"
+        },
+        {
+          "name": "AuthorID",
+          "json": "authorID",
+          "column": "author_id",
+          "column_meta": {
+            "column": "author_id"
+          },
+          "kind": "int64",
+          "weight": 1,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "i"
+          ],
+          "label": "作者ID",
+          "type": "text"
+        },
+        {
+          "name": "Path",
+          "json": "path",
+          "column": "path",
+          "column_meta": {
+            "column": "path"
+          },
+          "kind": "string",
+          "weight": 2,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "r",
+            "w"
+          ],
+          "label": "路径",
+          "type": "text"
+        },
+        {
+          "name": "Slug",
+          "json": "slug",
+          "column": "slug",
+          "column_meta": {
+            "column": "slug",
+            "unique": true
+          },
+          "kind": "string",
+          "weight": 3,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "r",
+            "w"
+          ],
+          "label": "网址别名",
+          "type": "text"
+        },
+        {
+          "name": "Title",
+          "json": "title",
+          "column": "title",
+          "column_meta": {
+            "column": "title"
+          },
+          "kind": "string",
+          "weight": 4,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "r",
+            "w"
+          ],
+          "label": "标题",
+          "type": "text"
+        },
+        {
+          "name": "Content",
+          "json": "content",
+          "column": "content",
+          "column_meta": {
+            "column": "content"
+          },
+          "kind": "string",
+          "weight": 5,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "r",
+            "w"
+          ],
+          "label": "内容",
+          "type": "text"
+        },
+        {
+          "name": "PublishedAt",
+          "json": "publishedAt",
+          "column": "published_at",
+          "column_meta": {
+            "column": "published_at"
+          },
+          "kind": "int64",
+          "weight": 6,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "r"
+          ],
+          "label": "发布于",
+          "type": "text"
+        },
+        {
+          "name": "ModifiedAt",
+          "json": "modifiedAt",
+          "column": "modified_at",
+          "column_meta": {
+            "column": "modified_at"
+          },
+          "kind": "int64",
+          "weight": 7,
+          "searchable": true,
+          "sortable": true,
+          "mode": [
+            "r"
+          ],
+          "label": "编辑于",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

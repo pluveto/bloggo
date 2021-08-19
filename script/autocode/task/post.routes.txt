@@ -1,0 +1,13 @@
+
+
+    gPost := r.Group("/post")
+    {
+        gPost.POST("/post/create", api.PostCreate)
+        gPost.GET("/post/get", api.PostGet)
+        gPost.GET("/post/get_recent", api.PostGetRecent)
+        gPost.POST("/post/list", api.PostList)
+        gPost.POST("/post/update", api.PostUpdate)
+        gPost.POST("/post/search", api.PostSearch)
+        gPost.POST("/post/enable", api.PostEnable)
+        gPost.POST("/post/disable", api.PostDisable)
+    }

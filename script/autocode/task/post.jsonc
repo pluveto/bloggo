@@ -1,0 +1,45 @@
+{
+    "name": "Post",
+    "route": ".",
+    "meta": {
+        "url": ".",
+        "json": "."
+    },
+    "apis": [
+        {
+            "method": "post",
+            "route": "",
+            "action": ".",
+            "actionOn": ".",
+            "baseModel": ".",
+            "form": {},
+            "permissions": [],
+            "autoAssign": {
+                "AuthorId": "${user_id}",
+                "PublishedAt": ".",
+                "ModifiedAt": "."
+            }
+        },
+        {
+            "method": "delete",
+            "action": ".",
+            "actionOn": ".",
+            "baseModel": ".",
+            "form": [],
+            "permissions": []
+        },
+        {
+            "method": "get"
+        },
+        {
+            "method": "POST",
+            "action": "List",
+            "paging": true,
+            "actionOn": "Recent",
+            "baseModel": ".",
+            "form": [],
+            "permissions": [],
+            "order": "PublishedAt desc"
+        }
+    ]
+}

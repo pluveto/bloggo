@@ -1,0 +1,77 @@
+{
+    "name": "Post",
+    "route": ".",
+    "meta": {
+        "json": "."
+    },
+    "apis": [        
+        {
+            "method": "post"
+        },
+        {
+            "method": "get",
+            "action": ".",
+            "route": ".",
+            "actionOn": ".",
+            "baseModel": ".",
+            "form": {},
+            "permissions": []
+        },
+        {
+            "method": "get",
+            "action": "Get",
+            "route": ".",
+            "paging": true,
+            "actionOn": "Recent",
+            "baseModel": ".",
+            "form": {},
+            "permissions": [],
+            "order": "PublishedAt desc"
+        },
+        {
+            "method": "POST",
+            "route": ".",
+            "action": "List",
+            "actionOn": ".",
+            "baseModel": ".",
+            "form": {},
+            "permissions": []
+        },
+        {
+            "method": "POST",
+            "route": ".",
+            "action": "Update",
+            "actionOn": ".",
+            "baseModel": ".",
+            "form": {},
+            "permissions": []
+        },
+        {
+            "method": "POST",
+            "route": ".",
+            "action": "Search",
+            "actionOn": ".",
+            "baseModel": ".",
+            "form": {},
+            "permissions": []
+        },
+        {
+            "method": "POST",
+            "route": ".",
+            "action": "Enable",
+            "actionOn": ".",
+            "baseModel": ".",
+            "form": {},
+            "permissions": []
+        },
+        {
+            "method": "POST",
+            "route": ".",
+            "action": "Disable",
+            "actionOn": ".",
+            "baseModel": ".",
+            "form": {},
+            "permissions": []
+        }        
+    ]
+}
