@@ -1,9 +1,11 @@
 package repository
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/go-redis/redis/v8"
 	"github.com/pluveto/bloggo/pkg/bloggo"
@@ -35,7 +37,11 @@ func New(c *bloggo.Config) *Repository {
 		Password: "", // no password set
 		DB:       0,  // use default DB
 	})
-
+	var ctx = context.Background()
+	var ret = repo.rdb.Set(ctx, "bloggo_started", time.Now().Unix(), 1)
+	if ret.Err() != nil {
+		panic("Redis may be not running!")
+	}
 	fmt.Println("[Repo] Repo is ready.")
 
 	return repo
