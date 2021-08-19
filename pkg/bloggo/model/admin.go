@@ -1,7 +1,7 @@
 package model
 
 /*
- * @autocode({"table": "admins", "json": "admin"})
+ * @autocode({"table": "admins", "json": "admin", "label": "管理员"})
  */
 type Admin struct {
 	ID          int64  `json:"id"          gorm:"column=id;primaryKey" auto:"weight=0;searchable=false;sortable=true;mode=r;  "`
