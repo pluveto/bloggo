@@ -52,6 +52,19 @@ func main() {
 	r.POST("/auth/login", api.AuthLogin)
 	r.POST("/auth/getUserInfo", middleware.JWTAuth(api.Service), api.AuthGetUserInfo)
 	r.POST("/auth/updateUserInfo", middleware.JWTAuth(api.Service), api.AuthUpdateUserInfo)
+
+	gPost := r.Group("/post")
+    {
+        gPost.POST("/post/create", api.PostCreate)
+        gPost.GET("/post/get", api.PostGet)
+        gPost.GET("/post/get_recent", api.PostGetRecent)
+        gPost.POST("/post/list", api.PostList)
+        gPost.POST("/post/update", api.PostUpdate)
+        gPost.POST("/post/search", api.PostSearch)
+        gPost.POST("/post/enable", api.PostEnable)
+        gPost.POST("/post/disable", api.PostDisable)
+    }
+
 	
 	r.Run()
 }
