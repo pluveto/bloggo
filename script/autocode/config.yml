@@ -1,0 +1,5 @@
+dir:
+  source:
+    model: /root/proj/bloggo/pkg/bloggo/model
+
+  task: ./task
