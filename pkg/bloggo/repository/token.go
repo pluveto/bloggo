@@ -9,7 +9,7 @@ import (
 func (r *Repository) TokenIsDestroyed(token string) bool {
 	var ctx = context.Background()
 	_, err := r.rdb.Get(ctx, "token_blacklist_"+token).Result()
-	if err == redis.Nil {
+	if err == redis.Nil || err.Error() == "redis: nil" {
 		return false
 	} else if err != nil {
 		panic(err)
@@ -17,4 +17,3 @@ func (r *Repository) TokenIsDestroyed(token string) bool {
 		return true
 	}
 }
-
