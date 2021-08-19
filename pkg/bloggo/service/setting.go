@@ -4,7 +4,7 @@ func (s *Service) GetSetting(key string) (value string, err error) {
 	return s.repo.GetSetting(key)
 }
 
-func (s *Service) GetOrDefault(key string, defaultValue string) (value string, err error) {
+func (s *Service) GetSettingOrDefault(key string, defaultValue string) (value string, err error) {
 	value, err = s.repo.GetSetting(key)
 	if err != nil {
 		value = defaultValue
@@ -14,6 +14,6 @@ func (s *Service) GetOrDefault(key string, defaultValue string) (value string, e
 }
 
 // TODO
-func (s *Service) Set(key string, value string) {
+func (s *Service) SetSetting(key string, value string) {
 
 }
