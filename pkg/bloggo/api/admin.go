@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/pluveto/bloggo/pkg/bloggo"
+	"github.com/pluveto/bloggo/pkg/bloggo/model"
 	"github.com/pluveto/bloggo/pkg/errcode"
 )
 
@@ -33,8 +34,9 @@ func (api *API) AdminCreate(c *gin.Context) {
 		api.retBadParam(c, err)
 		return
 	}
+	var existingAdmin *model.Admin
 	// 存在性检查，如果已经存在会返回 err，并为 existingAdmin 赋值
-	existingAdmin, _ := api.Service.AdminGetByEmail(req.Email)
+	existingAdmin, _ = api.Service.AdminGetByEmail(req.Email)
 	if existingAdmin != nil {
 		api.RetJSON(c, nil, errcode.ApiError(bloggo.ErrConflictEmail))
 		return
@@ -45,6 +47,6 @@ func (api *API) AdminCreate(c *gin.Context) {
 		return
 	}
 	var retModel = AdminCreateRet{ID: strconv.FormatInt(int64(newAdmin.ID), 10)}
-	log.Printf("%v", retModel)
+	log.Printf("%v\n", retModel)
 	api.RetJSON(c, retModel, err)
 }
