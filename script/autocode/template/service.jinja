@@ -1,0 +1,34 @@
+{%-for unique_field in group.unique_fields %}
+func (s *Service) {{group.name}}GetBy{{unique_field.name}}({{unique_field.json}} {{unique_field.kind}}) (model *model.{{group.name}}, err error) {
+    return s.repo.{{group.name}}GetBy{{unique_field.name}}({{unique_field.json}})
+}    
+{%-endfor %}		
+
+
+{%-for api in group.apis %}
+
+	{% if api.action == "Create" %}
+
+    // {{api.base_model}}Create 创建一个{{group.meta.label}}
+    func (s *Service) {{api.base_model}}Create(
+        {%-for field in api.req_fields %}
+			{{ field.json }} {{ field.kind }},
+		{%-endfor %}
+    ) (ret *model.{{api.base_model}}, err error) {
+        var model = &model.{{api.base_model}}{
+            {%-for field in api.req_fields %}
+				{{ field.name }}: {{ field.json }},
+			{%-endfor %}
+        }
+        err = s.repo.{{api.base_model}}Create(model)
+        if err != nil {
+            return
+        }
+        ret = model
+        return
+    }
+	
+	{% endif %}
+
+{%-endfor%}
+

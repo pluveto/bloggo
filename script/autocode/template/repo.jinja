@@ -1,0 +1,36 @@
+
+    
+{%-for unique_field in group.unique_fields %}
+func (repo *Repository) {{group.name}}GetBy{{unique_field.name}}({{unique_field.json}} {{unique_field.kind}}) (model *model.{{group.name}}, err error) {
+    return repo.{{group.name}}GetByUniqueKeyValue("{{unique_field.json}}", {{unique_field.json}})
+}    
+{%-endfor %}		
+
+func (repo *Repository) {{group.name}}Update(model *model.{{group.name}}) (err error) {
+    return repo.db.Save(model).Error
+}
+    
+func (repo *Repository) {{group.name}}GetByUniqueKeyValue(key string, value interface{}) (ret *model.{{group.name}}, err error) {
+    var m = model.{{group.name}}{}
+    err = repo.db.Where(key+" = ?", value).First(&m).Error
+    err = checkDbError(err)
+    if err != nil {
+        return nil, err
+    }
+    return &m, err
+}        
+
+{%-for api in group.apis %}
+	{% if api.action == "Create" %}
+
+    func (repo *Repository) {{api.base_model}}Create({{group.meta.json}} *model.{{api.base_model}}) (err error) {
+        err = repo.db.Create({{group.meta.json}}).Error
+        if err != nil && errors.Is(err, gorm.ErrInvalidValue) {
+            return
+        }
+        return
+    }
+	
+	{% endif %}
+{%-endfor%}
+

@@ -1,0 +1,64 @@
+{%-for api in group.apis %}
+
+	{# 请求结构体 #}
+
+	{% if api.req_fields is defined %}
+	type {{group.name}}{{api.full_action}}Req struct {
+		{%-for field in api.req_fields %}
+		{{field.name}}    {{field.kind}} `form:"{{field.json}}" json:"{{field.json}}" binding:"{{ 'required' if field.required else ''}}"`
+		{%-endfor%}
+	}
+	{%endif%}
+
+	{# 响应结构体 #}
+
+	{% if api.ret_fields is defined %}
+	type {{group.name}}{{api.full_action}}Ret struct {
+		{%-for field in api.ret_fields %}
+		{{field.name}}    {{field.kind}} {# `form:"{{field.json}}" json:"{{field.json}}" binding:"{{  'required' if field.required else '' }}"` #}
+		{%-endfor%}
+	}
+	{%endif%}
+
+	{# API 控制器 #}
+
+	{% if api.action == "Create" %}
+	
+	func (api *API) {{ api.base_model }}Create(c *gin.Context) {
+		var (
+			req {{ api.base_model }}CreateReq
+			err error = c.ShouldBindJSON(&req)
+		)
+
+		if err != nil {
+			api.retBadParam(c, err)
+			return
+		}
+		{# 针对主键进行重复检查 #}
+		{% if api.unique_field_names is defined %}
+		var existing{{ api.base_model }} *model.{{ api.base_model }}		
+		{% endif %}		
+		{%-for unique_field_name in api.unique_field_names %}
+		existing{{ api.base_model }}, _ := api.Service.{{ api.base_model }}GetBy{{unique_field_name}}(req.{{unique_field_name}})
+		if existing{{ api.base_model }} != nil {
+			api.RetJSON(c, nil, errcode.ApiError(bloggo.ErrConflict{{ api.base_model }}))
+			return
+		}
+		{%-endfor %}		
+		new{{ api.base_model }}, err := api.Service.{{ api.base_model }}Create(
+			{%-for field in api.req_fields %}
+				req.{{ field.name }},
+			{%-endfor %}
+		)
+		if err != nil {
+			api.RetJSON(c, nil, err)
+			return
+		}
+		var retModel = {{ api.base_model }}CreateRet{ID: new{{ api.base_model }}.ID}	
+		api.RetJSON(c, retModel, err)
+	}
+	
+	{% endif %}
+
+{%-endfor%}
+
